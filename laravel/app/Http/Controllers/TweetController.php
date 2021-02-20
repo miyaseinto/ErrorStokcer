@@ -17,7 +17,7 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::all();
+        $tweets = Tweet::all()->sortByDesc("id");
         $tweets->load('user');
         return view('tweets.index', ['tweets' => $tweets]);
 

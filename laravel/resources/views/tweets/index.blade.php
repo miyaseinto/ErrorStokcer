@@ -39,7 +39,7 @@
 
           <h5 class="card-title">
               投稿者：
-              <a href="#">{{ $tweet->user->name }}</a>
+              <a href="{{ route('users.show', $tweet->user_id) }}">{{ $tweet->user->name }}</a>
           </h5>
           <p class="card-text">{{ $tweet->content }}</p>
           <a href="{{ route('tweets.show', $tweet->id) }}" class="btn btn-primary">詳細</a>

@@ -21,6 +21,7 @@ Auth::routes();
 
 Route::get('/', [App\Http\Controllers\TweetController::class, 'index'])->name('tweets.index');
 
+Route::resource('/users', 'App\Http\Controllers\UserController');
 Route::resource('/tweets', 'App\Http\Controllers\TweetController', ['except' => ['index','edit','update','delete']]);
 Route::get('tweet/edit/{id}', 'App\Http\Controllers\TweetController@edit')->name('tweets.edit');
 Route::post('tweets/edit', 'App\Http\Controllers\TweetController@update')->name('tweets.update');
