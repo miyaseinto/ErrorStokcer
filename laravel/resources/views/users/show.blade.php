@@ -12,6 +12,7 @@
     @foreach ($user->tweets as $tweet)
       <div class="card">
         <div class="card-body">
+          <h5 class="card-title">{{ $tweet->title }}</h5>
           <h5 class="card-title">
               投稿内容
           </h5>

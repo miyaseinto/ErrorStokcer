@@ -10,6 +10,7 @@
     @endif
     <div class="card">
       <div class="card-body">
+        <h5 class="card-title">{{ $tweet->title }}</h5>
         <h5 class="card-title">
             投稿者：{{ $tweet->user->name }}
         </h5>

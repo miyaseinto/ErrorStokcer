@@ -2,29 +2,9 @@
 
 @section('content')
 
-<div class="card-body">
-  <div class="container">
-    <div class="row">
-          <div class="col-md-6">
-          <h2>検索フォーム</h2>
-              <div id="custom-search-input">
-                  <div class="input-group col-md-12">
-                      <form >
-                          {{ csrf_field() }}
-                          <input type="text" class="form-control input-lg" placeholder="Buscar" >
-                          <span class="input-group-btn" style="position: relative;top: -42px;right: -200px;">
-                              <button class="btn btn-info btn-lg" type="submit">
-                                <i class="fas fa-search"></i>
-                              </button>
-                          </span>
-                      </form>
-                  </div>
-              </div>
-          </div>
-    </div>
-  </div>
+<div class="card-header">
+  投稿一覧
 </div>
-<div class="card-header"></div>
 
 
 <div class="card-body">
@@ -36,7 +16,7 @@
     @foreach ($tweets as $tweet)
       <div class="card">
         <div class="card-body">
-
+        <h5 class="card-title">{{ $tweet->title }}</h5>
           <h5 class="card-title">
               投稿者：
               <a href="{{ route('users.show', $tweet->user_id) }}">{{ $tweet->user->name }}</a>

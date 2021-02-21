@@ -20,6 +20,7 @@ use Illuminate\Support\Facades\Route;
 Auth::routes();
 
 Route::get('/', [App\Http\Controllers\TweetController::class, 'index'])->name('tweets.index');
+Route::get('/tweets/search', [App\Http\Controllers\TweetController::class, 'search'])->name('tweets.search');
 
 Route::resource('/users', 'App\Http\Controllers\UserController');
 Route::resource('/tweets', 'App\Http\Controllers\TweetController', ['except' => ['index','edit','update','delete']]);

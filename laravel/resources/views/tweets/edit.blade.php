@@ -20,6 +20,10 @@
     <form action="{{ route('tweets.update') }}" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
         <div class="form-group">
+          <label for="exampleInputEmail1">titel</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" name="title" value="{{ $tweet->title }}">
+        </div>
+        <div class="form-group">
           <label for="comment">Comment:</label>
           <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="5">{{$tweet->content}}</textarea>
         </div>

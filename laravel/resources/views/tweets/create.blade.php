@@ -20,6 +20,10 @@
     <form action="{{ route('tweets.store') }}" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
         <div class="form-group">
+          <label for="exampleInputEmail1">title</label>
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="title" name="title">
+        </div>
+        <div class="form-group">
           <label for="comment">Comment:</label>
           <textarea class="form-control" rows="5" id="comment" name="content"></textarea>
         </div>

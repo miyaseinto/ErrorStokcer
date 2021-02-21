@@ -43,11 +43,11 @@ class TweetController extends Controller
     public function store(TweetRequest $request)
     {
         $tweet = new Tweet;
-
-        $input = $request->only($tweet->getFillable());
-
-        $tweet->create($input);
-
+        $tweet->user_id = $request->user_id;
+        $tweet->content = $request->content;
+        $tweet->title = $request->title;
+        $tweet->save();;
+        
         return redirect('/');
     }
 
@@ -96,6 +96,7 @@ class TweetController extends Controller
         $id = $request->tweet_id;
         $tweet = Tweet::findOrFail($id);
         $tweet->content = $request->content;
+        $tweet->title = $request->title;
         $tweet->save();
         return redirect('/');
 

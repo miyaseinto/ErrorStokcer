@@ -24,6 +24,7 @@ class TweetRequest extends FormRequest
     public function rules()
     {
         return [
+            'title' => 'required|max:255',
             'content' => 'required',
             'user_id' => 'required|numeric',
         ];
