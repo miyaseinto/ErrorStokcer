@@ -33,7 +33,9 @@
 
 
 @if(isset($search_query))
-    {{ $tweets->appends(['search' => $search_query]) }}
+    {{ $tweets->appends(['search' => $search_query])->links() }}
+@else
+    {{ $tweets->links() }}
 @endif
 
 </div>

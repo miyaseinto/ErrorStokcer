@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Tweet;
 use Illuminate\Http\Request;
 
 class UserController extends Controller
@@ -46,9 +47,12 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
-        $user->load('tweets');
-        return view('users.show',[
+        
+        $user = User::find($user->id); //idが、リクエストされた$userのidと一致するuserを取得
+        $tweets = Tweet::where('user_id', $user->id)->paginate(3);
+        return view('users.show', [
             'user' => $user,
+            'tweets' => $tweets, 
         ]);
     }
 

@@ -42,40 +42,57 @@
                     </ul>
 
                     <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto" style="text-align: right; font-size:20px; " >
+                    <ul class="navbar-nav ml-auto" style="text-align: right; font-size:20px; color:#ffff;" >
                         <!-- Authentication Links -->
                         @guest
                             @if (Route::has('login'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+                                <li class="nav-item" >
+                                    <a class="nav-link"style="color:#ffff;" href="{{ route('login') }}">{{ __('ログイン') }}</a>
                                 </li>
                             @endif
                             
                             @if (Route::has('register'))
                                 <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">{{ __('新規登録') }}</a>
+                                    <a class="nav-link" style="color:#ffff;" href="{{ route('register') }}">{{ __('新規登録') }}</a>
                                 </li>
                             @endif
+                            <li class="nav-item">
+                                <a class="nav-link" style="color:#ffff;" href="{{ route('login.guest') }}">{{ __('閲覧用') }}</a>
+                            </li>
                         @else
                             <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ffff;">
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" >
-                                    <a class="dropdown-item" href="{{ route('tweets.create') }}">投稿する</a>
-                                    <?php $user = Auth::user(); ?>
-                                    <a class="dropdown-item" href="{{route('users.show', $user->id)}}">マイページ</a>
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                        onclick="event.preventDefault();
-                                                        document.getElementById('logout-form').submit();">
-                                        {{ __('ログアウト') }}
-                                    </a>
+                                @if (Auth::user()->name != "ゲスト")
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" >
+                                        <a class="dropdown-item" href="{{ route('tweets.create') }}">投稿する</a>
+                                        <?php $user = Auth::user(); ?>
+                                        <a class="dropdown-item" href="{{route('users.show', $user->id)}}">マイページ</a>
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            {{ __('ログアウト') }}
+                                        </a>
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
-                                        @csrf
-                                    </form>
-                                </div>
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                @else
+                                    <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" >
+                                        <a class="dropdown-item" href="{{ route('logout') }}"
+                                            onclick="event.preventDefault();
+                                                            document.getElementById('logout-form').submit();">
+                                            {{ __('ログアウト') }}
+                                        </a>
+
+                                        <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                            @csrf
+                                        </form>
+                                    </div>
+                                @endif
                             </li>
                         @endguest
                     </ul>

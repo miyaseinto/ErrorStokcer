@@ -22,7 +22,8 @@ Auth::routes();
 Route::get('/', [App\Http\Controllers\TweetController::class, 'index'])->name('tweets.index');
 Route::get('/tweets/search', [App\Http\Controllers\TweetController::class, 'search'])->name('tweets.search');
 
-Route::resource('/users', 'App\Http\Controllers\UserController');
+Route::resource('/users', 'App\Http\Controllers\UserController', ['only' => ['show']]);
+Route::get('guest', 'App\Http\Controllers\Auth\LoginController@guestLogin')->name('login.guest');
 Route::resource('/tweets', 'App\Http\Controllers\TweetController', ['except' => ['index','edit','update','delete']]);
 Route::get('tweet/edit/{id}', 'App\Http\Controllers\TweetController@edit')->name('tweets.edit');
 Route::post('tweets/edit', 'App\Http\Controllers\TweetController@update')->name('tweets.update');
