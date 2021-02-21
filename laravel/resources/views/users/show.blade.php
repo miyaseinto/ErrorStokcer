@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header">{{ $user->name }}の投稿</div>
+<div class="card-header" style="text-align: center;">{{ $user->name }}の投稿</div>
 <div class="card-body">
     @if (session('status'))
         <div class="alert alert-success" role="alert">

@@ -10,9 +10,9 @@ class Tweet extends Model
     protected $table = 'tweets';
 
     protected $fillable = [
-        'user_id', 'content',
+        'title', 'user_id', 'content',
     ];
-    
+
     public function user(){
         return $this->belongsTo(\App\Models\User::class,'user_id');
     }

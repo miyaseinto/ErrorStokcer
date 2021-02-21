@@ -2,10 +2,13 @@
 
 @section('content')
 
-<div class="card-header">
+<div class="card-header" style="text-align: center;">
   投稿一覧
 </div>
 
+@isset($search_result)
+<h5 class="card-title" style="text-align: center; padding-top: 30px; font-size: 20px; color: #55c500">{{ $search_result }}</h5>
+@endisset
 
 <div class="card-body">
     @if (session('status'))
@@ -26,5 +29,12 @@
         </div>
       </div>
     @endforeach
+
+
+
+@if(isset($search_query))
+    {{ $tweets->appends(['search' => $search_query]) }}
+@endif
+
 </div>
 @endsection
