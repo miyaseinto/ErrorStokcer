@@ -116,4 +116,21 @@ class TweetController extends Controller
 
         return redirect('/');
     }
+
+    public function search(Request $request)
+    {
+
+        $tweets = Tweet::where('title' ,'like', "%{$request->search}%")
+        ->orwhere('content' ,'like', "%{$request->search}%")
+        ->paginate(5);
+
+
+        $search_result = '【'. $request->search. '】の検索結果は'.count($tweets).'件';
+
+        return view('tweets.index',[
+            'tweets' => $tweets,
+            'search_result' => $search_result,
+            'search_query'  => $request->search,
+        ]);
+    }
 }
