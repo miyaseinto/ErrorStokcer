@@ -17,7 +17,8 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::all()->sortByDesc("id");
+
+        $tweets = Tweet::latest()->paginate(3);
         $tweets->load('user');
         return view('tweets.index', ['tweets' => $tweets]);
 
@@ -122,10 +123,10 @@ class TweetController extends Controller
 
         $tweets = Tweet::where('title' ,'like', "%{$request->search}%")
         ->orwhere('content' ,'like', "%{$request->search}%")
-        ->paginate(5);
+        ->paginate(3);
 
 
-        $search_result = '【'. $request->search. '】の検索結果は'.count($tweets).'件';
+        $search_result = '【'. $request->search. '】の検索結果は'.$tweets->total().'件';
 
         return view('tweets.index',[
             'tweets' => $tweets,
