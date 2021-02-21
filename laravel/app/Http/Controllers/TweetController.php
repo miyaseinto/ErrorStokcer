@@ -17,7 +17,6 @@ class TweetController extends Controller
      */
     public function index()
     {
-
         $tweets = Tweet::latest()->paginate(3);
         $tweets->load('user');
         return view('tweets.index', ['tweets' => $tweets]);
@@ -61,12 +60,10 @@ class TweetController extends Controller
     public function show(Tweet $tweet)
     {
 
-
         $tweet->load('user');
 
         return view('tweets.show',[
             'tweet' => $tweet,
-
         ]);
 
     }

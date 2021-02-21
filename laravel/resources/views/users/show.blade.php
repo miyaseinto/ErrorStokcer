@@ -9,7 +9,7 @@
         </div>
     @endif
 
-    @foreach ($user->tweets as $tweet)
+    @foreach ($tweets as $tweet)
       <div class="card">
         <div class="card-body">
           <h5 class="card-title">{{ $tweet->title }}</h5>
@@ -24,9 +24,9 @@
                 <input type="submit" value="削除" class="btn btn-danger" style="position: relative;top: -37px;right: -60px;" >
             </form>
           @endauth
-        
         </div>
       </div>
     @endforeach
+  {{ $tweets->links() }}
 </div>
 @endsection
