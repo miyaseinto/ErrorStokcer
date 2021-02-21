@@ -18,6 +18,13 @@
           </h5>
           <p class="card-text">{{ $tweet->content }}</p>
           <a href="{{ route('tweets.show', $tweet->id) }}" class="btn btn-primary">詳細</a>
+          @auth
+            <form action="{{ route('tweets.destroy', $tweet->id) }}" method="post">
+                {{ csrf_field() }}
+                <input type="submit" value="削除" class="btn btn-danger" style="position: relative;top: -37px;right: -60px;" >
+            </form>
+          @endauth
+        
         </div>
       </div>
     @endforeach

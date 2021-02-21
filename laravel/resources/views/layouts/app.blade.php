@@ -33,7 +33,7 @@
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <form class="form-inline my-2 my-lg-0">
-                    <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+                    <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search">
                 </form>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
@@ -65,7 +65,7 @@
                                 <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" >
                                     <a class="dropdown-item" href="{{ route('tweets.create') }}">投稿する</a>
                                     <?php $user = Auth::user(); ?>
-                                    <a class="dropdown-item" href="{{route('tweets.show', $user->id)}}">マイページ</a>
+                                    <a class="dropdown-item" href="{{route('users.show', $user->id)}}">マイページ</a>
                                     <a class="dropdown-item" href="{{ route('logout') }}"
                                         onclick="event.preventDefault();
                                                         document.getElementById('logout-form').submit();">
