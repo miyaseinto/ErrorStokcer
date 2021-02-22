@@ -14,6 +14,14 @@
         <h5 class="card-title">
             投稿者：{{ $tweet->user->name }}
         </h5>
+        <h5 class="card-title">
+            Tag:
+            @foreach($tweet->tags as $tag)
+                <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
+                    #{{ $tag->tag_name }}
+                </a>
+            @endforeach
+          </h5>
         <p class="card-text">{{ $tweet->content }}</p>
         <a href="{{ route('tweets.edit', $tweet->id) }}" class="btn btn-primary">編集</a>
       </div>

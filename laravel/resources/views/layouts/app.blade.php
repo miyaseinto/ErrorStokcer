@@ -32,9 +32,12 @@
             </button>
 
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                @guest
+                @else
                 <form action="{{ route('tweets.search') }}" method="get" class="form-inline my-2 my-lg-0">
                     <input class="form-control mr-sm-2" type="search" placeholder="キーワード検索" aria-label="Search" name="search">
                 </form>
+                @endguest
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <!-- Left Side Of Navbar -->
                     <ul class="navbar-nav mr-auto">

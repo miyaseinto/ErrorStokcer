@@ -26,6 +26,7 @@ class TweetRequest extends FormRequest
         return [
             'title' => 'required|max:255',
             'content' => 'required',
+            'tag_box' => 'required',
             'user_id' => 'required|numeric',
         ];
     }

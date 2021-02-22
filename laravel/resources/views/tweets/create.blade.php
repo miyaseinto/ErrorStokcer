@@ -24,6 +24,10 @@
           <input type="text" class="form-control" id="exampleInputEmail1" placeholder="title" name="title">
         </div>
         <div class="form-group">
+              <label for="tags">タグ</label>
+              <input id="tags" name="tag_box" class="form-control" type="text" >
+        </div>
+        <div class="form-group">
           <label for="comment">Comment:</label>
           <textarea class="form-control" rows="5" id="comment" name="content"></textarea>
         </div>

@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Tweet;
+use App\Models\Tag;
 use Illuminate\Http\Request;
+
 
 use App\Http\Requests\TweetRequest;
 
@@ -17,10 +19,29 @@ class TweetController extends Controller
      */
     public function index()
     {
-        $tweets = Tweet::latest()->paginate(3);
-        $tweets->load('user');
-        return view('tweets.index', ['tweets' => $tweets]);
 
+        $q = \Request::query();
+
+
+        if(isset($q['tag_name'])){
+            $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(3);
+            $tweets->load('user', 'tags');
+
+            return view('tweets.index', [
+                'tweets' => $tweets,
+                'tag_name' => $q['tag_name']
+            ]);
+        }else {
+     
+            $tweets = Tweet::latest()->paginate(3);
+            $tweets->load('user', 'tags');
+            
+            return view('tweets.index', [
+                'tweets' => $tweets,
+            ]);
+
+        
+        }
     }
 
     /**
@@ -45,10 +66,32 @@ class TweetController extends Controller
         $tweet = new Tweet;
         $tweet->user_id = $request->user_id;
         $tweet->content = $request->content;
+        $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
-        $tweet->save();;
-        
+
+    
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
+
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $found = Tag::firstOrCreate(['tag_name' => $tag]);
+            array_push($tags, $found);
+        }
+
+        $tag_ids = [];
+        foreach ($tags as $tag) {
+            array_push($tag_ids, $tag['id']);
+        }
+
+
+
+        $tweet->save();
+        $tweet->tags()->attach($tag_ids);
+
         return redirect('/');
+
+        
+
     }
 
     /**
@@ -95,7 +138,29 @@ class TweetController extends Controller
         $tweet = Tweet::findOrFail($id);
         $tweet->content = $request->content;
         $tweet->title = $request->title;
-        $tweet->save();
+        $tweet->tag_box = $request->tag_box;
+
+
+
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
+
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $found = Tag::firstOrCreate(['tag_name' => $tag]);
+            array_push($tags, $found);
+        }
+
+        $tag_ids = [];
+        foreach ($tags as $tag) {
+            array_push($tag_ids, $tag['id']);
+        }
+
+
+
+        $tweet->tags()->attach($tag_ids);
+        $tweet->update();
+        
+
         return redirect('/');
 
     }
