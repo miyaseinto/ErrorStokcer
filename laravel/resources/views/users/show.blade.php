@@ -25,13 +25,27 @@
                 @endforeach
           </h5>
           <p class="card-text">{{ $tweet->content }}</p>
-          <a href="{{ route('tweets.show', $tweet->id) }}" class="btn btn-primary">詳細</a>
-          @auth
-            <form action="{{ route('tweets.destroy', $tweet->id) }}" method="post">
-                {{ csrf_field() }}
-                <input type="submit" value="削除" class="btn btn-danger" style="position: relative;top: -37px;right: -60px;" >
-            </form>
-          @endauth
+
+          @if ($tweet->user_id == Auth::user()->id)
+            <div class="dropdown open">
+              <button class="btn btn-primary dropdown-toggle"
+                      type="button" id="dropdownMenu4" data-toggle="dropdown"
+                      aria-haspopup="true" aria-expanded="false">
+                Edit&Delete
+              </button>
+              <div class="dropdown-menu">
+                <a href="{{ route('tweets.edit', $tweet->id) }}" type="button" class="dropdown-item">編集</a>
+                <form action="{{ route('tweets.destroy', $tweet->id) }}" method="post" >
+                    {{ csrf_field() }}
+                    <input type="submit" value="削除" class="dropdown-item" >
+                </form>
+              </div>
+            </div>  
+          @else
+          @endif
+          
+          
+          
         </div>
       </div>
     @endforeach

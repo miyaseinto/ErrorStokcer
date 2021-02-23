@@ -23,7 +23,7 @@
         <h5 class="card-title">{{ $tweet->title }}</h5>
           <h5 class="card-title">
               投稿者：
-              <a href="{{ route('users.show', $tweet->user_id) }}">{{ $tweet->user->name }}</a>
+              <a href="{{ route('users.show', $tweet->user_id) }}" class="btn btn-outline-primary btn-sm">{{ $tweet->user->name }}</a>
               が
               <span class="text-muted" style="font-size:15px;">{{ $tweet->created_at->format('Y年m月d日')  }}にストック</span>
           </h5>

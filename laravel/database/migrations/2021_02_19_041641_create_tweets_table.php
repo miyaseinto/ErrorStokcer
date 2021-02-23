@@ -16,9 +16,9 @@ class CreateTweetsTable extends Migration
         Schema::create('tweets', function (Blueprint $table) {
             $table->bigIncrements('id')->autoIncrement();
             $table->unsignedBigInteger('user_id');
-            $table->string('title')->nullable();
-            $table->text('content')->nullable();
-            $table->text('tag_box');
+            $table->string('title');
+            $table->text('content');
+            $table->text('tag_box')->nullable();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamp('created_at')->default(\DB::raw('CURRENT_TIMESTAMP'))->nullable();
             $table->timestamp('updated_at')->default(\DB::raw('CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP'))->nullable();

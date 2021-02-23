@@ -37,9 +37,11 @@
         </div>
 
         <input name="tweet_id" type="hidden" value="{{$tweet->id}}">
+        <input type="hidden" name="user_id" value="{{ $tweet->user_id }}">
 
 
-        <input class="btn btn-primary" type="submit" value="変更する">
+        <input class="btn btn-primary" type="submit" value="変更">
+        <button type="submit" name="action" value="back" class="btn btn-primary">戻る</button>
     </form>
 </div>
 @endsection

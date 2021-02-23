@@ -138,11 +138,20 @@ class TweetController extends Controller
         $tweet = Tweet::findOrFail($id);
         $tweet->content = $request->content;
         $tweet->title = $request->title;
+        $tweet->user_id = $request->user_id;
         $tweet->tag_box = $request->tag_box;
 
 
+        // $items = Tweet::where('tag_box', '=', $tweet);
+        // dd($items);
+        // $items = \DB::table('tweets')->select('tag_box')->find($id);
+        // foreach ($items as $item) {
+        //     $item->delete();
+        // }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
+
+
 
         $tags = [];
         foreach ($match[1] as $tag) {
@@ -154,10 +163,10 @@ class TweetController extends Controller
         foreach ($tags as $tag) {
             array_push($tag_ids, $tag['id']);
         }
+        
 
+        $tweet->tags()->sync($tag_ids);
 
-
-        $tweet->tags()->attach($tag_ids);
         $tweet->update();
         
 
