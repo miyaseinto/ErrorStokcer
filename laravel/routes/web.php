@@ -31,3 +31,4 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('tweets/edit', 'App\Http\Controllers\TweetController@update')->name('tweets.update');
     Route::post('tweets/delete/{id}', 'App\Http\Controllers\TweetController@destroy')->name('tweets.destroy');
 });
+Route::resource('/comments', 'App\Http\Controllers\CommentController')->middleware('auth');
