@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Tweet;
 use App\Models\Tag;
+use App\Models\Comment;
 use Illuminate\Http\Request;
 
 
@@ -103,10 +104,14 @@ class TweetController extends Controller
     public function show(Tweet $tweet)
     {
 
-        $tweet->load('user');
+        $tweetid = $tweet->id;
+        $comments = Comment::where('tweet_id', '=', $tweetid)->get();
+
+        $tweet->load('user','comments');
 
         return view('tweets.show',[
             'tweet' => $tweet,
+            'comments' => $comments,
         ]);
 
     }

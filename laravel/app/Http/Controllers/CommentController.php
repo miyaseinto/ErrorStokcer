@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 
+use App\Http\Requests\CommentRequest;
+
+
 class CommentController extends Controller
 {
     /**
@@ -14,7 +17,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        //
+        
     }
 
     /**
@@ -24,7 +27,11 @@ class CommentController extends Controller
      */
     public function create()
     {
-        //
+        $q = \Request::query();
+
+        return view('comments.create',[
+            'tweet_id' => $q['tweet_id'],
+        ]);
     }
 
     /**
@@ -33,9 +40,14 @@ class CommentController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $comment = new Comment;
+        $input = $request->only($comment->getFillable());
+
+        $comment = $comment->create($input);
+        
+        return redirect('/tweets/' .$comment->tweet_id);
     }
 
     /**
