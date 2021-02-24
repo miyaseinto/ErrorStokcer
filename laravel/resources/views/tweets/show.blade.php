@@ -57,18 +57,13 @@
     @foreach($comments as $comment)
       <div class="card mx-3 my-2 shadow">
           <div class="card-header d-flex bd-highlight" >
-            @if($comment->user->name == "ゲスト")
+            @if($comment->user_id == 1)
               ゲスト
               <div class="text-muted pl-2 flex-grow-1 bd-highlight">
                 {{$comment->created_at}}
               </div>
-            @elseif($comment->user->name == $tweet->user->name)
-              {{"@".$comment->user->name}}
-              <div class="text-muted pl-2 lex-grow-1 bd-highlight">
-                {{$comment->created_at}}
-              </div>
-            @else
-              <a href="{{ route('users.show', $tweet->user_id) }}" class="btn btn-outline-primary btn-sm lex-grow-1 bd-highlight ">
+            @elseif($comment->user_id == Auth::user()->id)
+              <a href="{{ route('users.show', $comment->user_id) }}" class="btn btn-outline-primary btn-sm lex-grow-1 bd-highlight ">
                 {{"@".$comment->user->name}}
               </a>
               <div class="text-muted pl-2 my-box mr-auto align-self-center">
@@ -77,9 +72,19 @@
               <div class="dropdown open text-muted justify-content-end">
                 <i class="fas fa-ellipsis-h " type="button" id="dropdownMenu5" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"></i>
                 <div class="dropdown-menu">
-                  <a class="dropdown-item" href="#!">Action</a>
-                  <a class="dropdown-item" href="#!">Disabled action</a>
+                  <a class="dropdown-item" href="{{ route('comments.edit', $comment->id) }}">編集</a>
+                  <form action="{{ route('comments.destroy', $comment->id) }}" method="post" >
+                      {{ csrf_field() }}
+                      <input type="submit" value="削除" class="dropdown-item" >
+                  </form>
                 </div>
+              </div>
+            @else
+              <a href="{{ route('users.show', $comment->user_id) }}" class="btn btn-outline-primary btn-sm lex-grow-1 bd-highlight ">
+                {{"@".$comment->user->name}}
+              </a>
+              <div class="text-muted pl-2 my-box mr-auto align-self-center">
+                {{$comment->created_at}}
               </div>
             @endif
           </div>

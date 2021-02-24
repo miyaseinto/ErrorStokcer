@@ -67,9 +67,12 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function edit(Comment $comment)
+    public function edit($id)
     {
-        //
+        $comment = Comment::findOrFail($id);
+        return view('comments.edit',[
+            'comment' => $comment,
+        ]);
     }
 
     /**
@@ -79,9 +82,14 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Comment $comment)
+    public function update(CommentRequest $request)
     {
-        //
+        $id = $request->comment_id;
+        $comment = Comment::findOrFail($id);
+        $comment->comment = $request->comment;
+
+        $comment->update();
+        return redirect('/tweets/' .$comment->tweet_id);
     }
 
     /**
@@ -90,8 +98,11 @@ class CommentController extends Controller
      * @param  \App\Models\Comment  $comment
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Comment $comment)
+    public function destroy($id)
     {
-        //
+        $comment = Comment::find($id);
+        $comment->delete();
+
+        return redirect('/tweets/' .$comment->tweet_id);
     }
 }
