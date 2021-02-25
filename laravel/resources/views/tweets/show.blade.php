@@ -22,7 +22,9 @@
                 </a>
             @endforeach
           </h5>
-        <p class="card-text">{{ $tweet->content }}</p>
+        <div class="card-text">
+          {!! $tweet->markdown_body !!}
+        </div>
         @if ($tweet->user_id == Auth::user()->id)
           <div class="dropdown open">
             <button class="btn btn-primary dropdown-toggle"
@@ -89,7 +91,7 @@
             @endif
           </div>
         <div class="card-body">
-          <p class="card-text">{{ $comment->comment}}</p>
+          <p class="card-text">{!! $comment->markdown_body !!}</p>
         </div>
       </div>
     @endforeach
