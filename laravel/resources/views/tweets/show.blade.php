@@ -10,18 +10,18 @@
     @endif
     <div class="card">
       <div class="card-body">
-        <h5 class="card-title">{{ $tweet->title }}</h5>
+        <h6 class="card-title">
+          {{ "@".$tweet->user->name }}の投稿
+        </h6>
+        <h2 class="card-title">{{ $tweet->title }}</h2>
         <h5 class="card-title">
-            投稿者：{{ $tweet->user->name }}
-        </h5>
-        <h5 class="card-title">
-            Tag:
+          <i class="fas fa-tags"></i>
             @foreach($tweet->tags as $tag)
                 <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
                     #{{ $tag->tag_name }}
                 </a>
             @endforeach
-          </h5>
+        </h5>
         <div class="card-text">
           {!! $tweet->markdown_body !!}
         </div>
