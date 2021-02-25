@@ -20,23 +20,22 @@
     @foreach ($tweets as $tweet)
       <div class="card">
         <div class="card-body">
-        <h5 class="card-title">{{ $tweet->title }}</h5>
+        <a href="{{ route('tweets.show', $tweet->id) }}" class="text-dark">
+            <h5 class="card-title">{{ $tweet->title }}</h5>
+        </a>
           <h5 class="card-title">
-              投稿者：
-              <a href="{{ route('users.show', $tweet->user_id) }}" class="btn btn-outline-primary btn-sm">{{ $tweet->user->name }}</a>
+              <a href="{{ route('users.show', $tweet->user_id) }}" class="btn btn-outline-primary btn-sm">{{ "@".$tweet->user->name }}</a>
               が
               <span class="text-muted" style="font-size:15px;">{{ $tweet->created_at->format('Y年m月d日')  }}にストック</span>
           </h5>
           <h5 class="card-title">
-                Tag:
+                <i class="fas fa-tags"></i>
                 @foreach($tweet->tags as $tag)
                     <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
                         #{{ $tag->tag_name }}
                     </a>
                 @endforeach
           </h5>
-          <p class="card-text">{{ $tweet->content }}</p>
-          <a href="{{ route('tweets.show', $tweet->id) }}" class="btn btn-primary">詳細</a>
         </div>
       </div>
     @endforeach

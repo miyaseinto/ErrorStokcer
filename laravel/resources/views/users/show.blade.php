@@ -12,20 +12,18 @@
     @foreach ($tweets as $tweet)
       <div class="card">
         <div class="card-body">
-          <h5 class="card-title">{{ $tweet->title }}</h5>
+          <a href="{{ route('tweets.show', $tweet->id) }}" class="text-dark">
+            <span class="text" style="font-size:30px;">{{ $tweet->title }}</span>
+          </a>
+          <span class="text-muted" style="font-size:15px;">{{ $tweet->created_at->format('Y年m月d日')  }}にストック</span>
           <h5 class="card-title">
-              投稿内容
-          </h5>
-          <h5 class="card-title">
-                Tag:
+              <i class="fas fa-tags"></i>
                 @foreach($tweet->tags as $tag)
                     <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
                         #{{ $tag->tag_name }}
                     </a>
                 @endforeach
           </h5>
-          <p class="card-text">{{ $tweet->content }}</p>
-
           @if ($tweet->user_id == Auth::user()->id)
             <div class="dropdown open">
               <button class="btn btn-primary dropdown-toggle"
