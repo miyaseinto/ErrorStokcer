@@ -28,7 +28,7 @@ class LoginController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/top';
 
     /**
      * Create a new controller instance.
@@ -50,9 +50,9 @@ class LoginController extends Controller
         $password = 'gestgest';
 
         if(Auth::attempt(['name' => $name, 'password' => $password])) {
-            return redirect('/');
+            return redirect('/top');
         }
 
-        return redirect('/');
+        return redirect('/top');
     }
 }

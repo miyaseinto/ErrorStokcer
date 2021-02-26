@@ -1,9 +1,9 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="card-header" style="text-align: center;">
+<h2 class="card-header" style="text-align: center;">
   投稿詳細
-</div>
+</h2>
 <div class="card-body">
     @if (session('status'))
         <div class="alert alert-success" role="alert">

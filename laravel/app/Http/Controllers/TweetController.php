@@ -97,7 +97,7 @@ class TweetController extends Controller
         $tweet->save();
         $tweet->tags()->attach($tag_ids);
 
-        return redirect('/');
+        return redirect('/top');
 
         
 
@@ -172,11 +172,10 @@ class TweetController extends Controller
             array_push($tag_ids, $tag['id']);
         }
         
-
         $tweet->tags()->sync($tag_ids);
 
         $tweet->update();
-        return redirect('/');
+        return redirect('/top');
 
     }
 
@@ -189,10 +188,12 @@ class TweetController extends Controller
     public function destroy($id)
     {
         $tweet = TWeet::find($id);
+        $tag = Tag::find($id);
         $tweet->delete();
+        $tag->delete();
 
 
-        return redirect('/');
+        return redirect('/top');
     }
 
     public function search(Request $request)
@@ -201,7 +202,6 @@ class TweetController extends Controller
         $tweets = Tweet::where('title' ,'like', "%{$request->search}%")
         ->orwhere('content' ,'like', "%{$request->search}%")
         ->paginate(10);
-
 
         $search_result = '【'. $request->search. '】の検索結果は'.$tweets->total().'件';
 
