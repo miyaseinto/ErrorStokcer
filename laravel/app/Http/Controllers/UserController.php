@@ -49,7 +49,7 @@ class UserController extends Controller
     {
         
         $user = User::find($user->id); //idが、リクエストされた$userのidと一致するuserを取得
-        $tweets = Tweet::where('user_id', $user->id)->paginate(3);
+        $tweets = Tweet::where('user_id', $user->id)->paginate(10);
         return view('users.show', [
             'user' => $user,
             'tweets' => $tweets, 

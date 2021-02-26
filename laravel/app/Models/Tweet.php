@@ -12,7 +12,7 @@ class Tweet extends Model
     protected $table = 'tweets';
 
     protected $fillable = [
-        'title', 'user_id','content',
+        'title', 'user_id','content', 'image',
     ];
 
     public function user(){
