@@ -9,44 +9,28 @@
         </div>
     @endif
 
-    @foreach ($tweets as $tweet)
-      <div class="card">
-        <div class="card-body">
-          <a href="{{ route('tweets.show', $tweet->id) }}" class="text-dark">
-            <span class="text" style="font-size:30px;">{{ $tweet->title }}</span>
-          </a>
+@foreach ($tweets as $tweet)
+  <div class="toast fade show" role="alert" aria-live="assertive" aria-atomic="true">
+      <div class="toast-header">
+          <h1 class="mr-auto">
+            <a href="{{ route('tweets.show', $tweet->id) }}" class="text-dark">
+              {{ $tweet->title }}
+            </a>
+          </h1>
           <span class="text-muted" style="font-size:15px;">{{ $tweet->created_at->format('Y年m月d日')  }}にストック</span>
+      </div>
+      <div class="toast-body">
           <h5 class="card-title">
               <i class="fas fa-tags"></i>
-                @foreach($tweet->tags as $tag)
-                    <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
-                        #{{ $tag->tag_name }}
-                    </a>
-                @endforeach
+              @foreach($tweet->tags as $tag)
+                  <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="badge badge-success">
+                      #{{ $tag->tag_name }}
+                  </a>
+              @endforeach
           </h5>
-          @if ($tweet->user_id == Auth::user()->id)
-            <div class="dropdown open">
-              <button class="btn btn-primary dropdown-toggle"
-                      type="button" id="dropdownMenu4" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                Edit&Delete
-              </button>
-              <div class="dropdown-menu">
-                <a href="{{ route('tweets.edit', $tweet->id) }}" type="button" class="dropdown-item">編集</a>
-                <form action="{{ route('tweets.destroy', $tweet->id) }}" method="post" >
-                    {{ csrf_field() }}
-                    <input type="submit" value="削除" class="dropdown-item" >
-                </form>
-              </div>
-            </div>  
-          @else
-          @endif
-          
-          
-          
-        </div>
       </div>
-    @endforeach
-  {{ $tweets->links() }}
+  </div>
+@endforeach
+{{ $tweets->links() }}
 </div>
 @endsection

@@ -25,7 +25,7 @@ class TweetController extends Controller
 
 
         if(isset($q['tag_name'])){
-            $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(3);
+            $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(10);
             $tweets->load('user', 'tags');
 
             return view('tweets.index', [
@@ -34,7 +34,7 @@ class TweetController extends Controller
             ]);
         }else {
      
-            $tweets = Tweet::latest()->paginate(3);
+            $tweets = Tweet::latest()->paginate(10);
             $tweets->load('user', 'tags');
             
             return view('tweets.index', [
@@ -64,13 +64,23 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
+
         $tweet = new Tweet;
         $tweet->user_id = $request->user_id;
         $tweet->content = $request->content;
         $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
 
-    
+
+        // $imageName = str_shuffle($request->file('image')->getClientOriginalName()). '.' . $request->file('image')->getClientOriginalExtension(). '.' . $request->file('image')->getRealPath();//ファイル名をユニックするためstr_shuffleを使う
+        // dd($imageName);
+        
+        
+        if($request->image){
+            $filename = $request->file('image')->store('public/image');
+            $tweet->image = basename($filename);
+        }
+
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
         $tags = [];
@@ -83,8 +93,6 @@ class TweetController extends Controller
         foreach ($tags as $tag) {
             array_push($tag_ids, $tag['id']);
         }
-
-
 
         $tweet->save();
         $tweet->tags()->attach($tag_ids);
@@ -146,6 +154,11 @@ class TweetController extends Controller
         $tweet->user_id = $request->user_id;
         $tweet->tag_box = $request->tag_box;
 
+        if($request->image){
+            $filename = $request->file('image')->store('public/image');
+            $tweet->image = basename($filename);
+        }
+
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
         $tags = [];
@@ -187,7 +200,7 @@ class TweetController extends Controller
 
         $tweets = Tweet::where('title' ,'like', "%{$request->search}%")
         ->orwhere('content' ,'like', "%{$request->search}%")
-        ->paginate(3);
+        ->paginate(10);
 
 
         $search_result = '【'. $request->search. '】の検索結果は'.$tweets->total().'件';
