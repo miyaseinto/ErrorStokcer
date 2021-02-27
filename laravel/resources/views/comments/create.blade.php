@@ -28,6 +28,7 @@
         <input type="hidden" name="tweet_id" value="{{ $tweet_id }}">
 
         <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" name="action" value="back" class="btn btn-primary">Back</button>
     </form>
 </div>
 @endsection

@@ -48,20 +48,6 @@
                     <ul class="navbar-nav ml-auto" style="text-align: right; font-size:20px; color:#ffff;" >
                         <!-- Authentication Links -->
                         @guest
-                            @if (Route::has('login'))
-                                <li class="nav-item" >
-                                    <a class="nav-link"style="color:#ffff;" href="{{ route('login') }}">{{ __('ログイン') }}</a>
-                                </li>
-                            @endif
-                            
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" style="color:#ffff;" href="{{ route('register') }}">{{ __('新規登録') }}</a>
-                                </li>
-                            @endif
-                            <li class="nav-item">
-                                <a class="nav-link" style="color:#ffff;" href="{{ route('login.guest') }}">{{ __('閲覧用') }}</a>
-                            </li>
                         @else
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre style="color:#ffff;">

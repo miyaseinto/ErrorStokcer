@@ -21,36 +21,39 @@
 <body>
 <main role="main">
 
-  <div class="jumbotron" style="background-color: #55c500;">
-    <div class="container">
-      <a class="display-3" href="{{ url('/') }}" style="color: #ffffff; font-family:'arial black'; border:none;">
-        {{ config('app.name', 'ErrorStocker!') }}
-      </a>
+    <div class="jumbotron" style="position: relative; height: 70vh; min-height: 300px; background: url(../storage/image/main.jpg) no-repeat center center; background-size: cover;">
+        <div class="text-left" style="position: relative; top: 50%; transform: translateY(-50%)">
+            <span class= "text-center" style="color: #55c500; font-size:50px;">ErrorStocker!</span>
+        </div>
     </div>
-  </div>
 
   <div class="container">
     <div class="row">
       <div class="col-md-4">
         <h2>ErrorStockerとは??</h2>
-        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
-        <p><a class="btn btn-secondary" href="#" role="button">詳しくみる &raquo;</a></p>
+        <p>ErrorStockerとは、文字通りエラーを保存する為のアプリケーションです。『一度エラーが生じた際に、ネットから情報を探してきて解決に導く』この作業を短縮できればより多くのタスクをこなすことができると考えました。一度経験した、エラーや勉強した内容を一つの場所に集めておけば見直すことができるので、それを形にしたものです。</p>
       </div>
       <div class="col-md-4">
-        <h2>見出し</h2>
-        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
-        <p><a class="btn btn-secondary" href="#" role="button">詳しくみる &raquo;</a></p>
+        <h2>使用方法</h2>
+        <p>閲覧用とログインして使用できる２パターンがあります。閲覧用は、閲覧Buttonをクリックすると使用できます。ただ、投稿することはできません。投稿する場合はログインしてからしかできません。投稿をする際は、タイトル・タグ（任意）・写真（任意）・内容を投稿することができます。内容を記述する際は、markdown記法で投稿できるようにしてます。</p>
       </div>
       <div class="col-md-4">
-        <h2>見出し</h2>
-        <p>吾輩は猫である。名前はまだ無い。どこで生れたかとんと見当がつかぬ。何でも薄暗いじめじめした所でニャーニャー泣いていた事だけは記憶している。吾輩はここで始めて人間というものを見た。</p>
-        <p><a class="btn btn-secondary" href="#" role="button">詳しくみる &raquo</a></p>
+        @if (Route::has('login'))
+            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+        @endif
+        @if (Route::has('register'))
+            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('register') }}">{{ __('新規登録') }}</a>
+        @endif
+            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login.guest') }}">{{ __('閲覧用') }}</a>
       </div>
     </div>
+
+
 
     <hr>
 
   </div>
+  
 
 </main>
 </body>
