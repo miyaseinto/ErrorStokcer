@@ -41,7 +41,6 @@
 
 
         <input class="btn btn-primary" type="submit" value="変更">
-        <button type="submit" name="action" value="back" class="btn btn-primary">戻る</button>
     </form>
 </div>
 @endsection

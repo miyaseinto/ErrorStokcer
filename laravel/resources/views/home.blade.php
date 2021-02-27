@@ -38,16 +38,28 @@
         <p>閲覧用とログインして使用できる２パターンがあります。閲覧用は、閲覧Buttonをクリックすると使用できます。ただ、投稿することはできません。投稿する場合はログインしてからしかできません。投稿をする際は、タイトル・タグ（任意）・写真（任意）・内容を投稿することができます。内容を記述する際は、markdown記法で投稿できるようにしてます。</p>
       </div>
       <div class="col-md-4">
-        @if (Route::has('login'))
-            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+        @if(Auth::user() == Null)
+          @if (Route::has('login'))
+              <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login') }}">{{ __('ログイン') }}</a>
+          @endif
+          @if (Route::has('register'))
+              <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('register') }}">{{ __('新規登録') }}</a>
+          @endif
+              <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login.guest') }}">{{ __('閲覧用') }}</a>
+        @else
+          <p>現在ログインされている状態ですので、下記に従ってログアウトしてください。</p>
+          <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('logout') }}"
+              onclick="event.preventDefault();
+                              document.getElementById('logout-form').submit();">
+              {{ __('ログアウト') }}
+          </a>
+
+          <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+              @csrf
+          </form>
         @endif
-        @if (Route::has('register'))
-            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('register') }}">{{ __('新規登録') }}</a>
-        @endif
-            <a class="btn btn-outline-success btn-lg btn-block" href="{{ route('login.guest') }}">{{ __('閲覧用') }}</a>
       </div>
     </div>
-
 
 
     <hr>

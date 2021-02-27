@@ -54,7 +54,7 @@
                                     {{ Auth::user()->name }}
                                 </a>
 
-                                @if (Auth::user()->name != "ゲスト")
+                                @if (Auth::user()->id != 1)
                                     <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown" >
                                         <a class="dropdown-item" href="{{ route('tweets.create') }}">投稿する</a>
                                         <?php $user = Auth::user(); ?>

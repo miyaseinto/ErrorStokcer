@@ -41,7 +41,6 @@
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
         <button type="submit" class="btn btn-primary">Submit</button>
-        <button type="submit" name="action" value="back" class="btn btn-primary">Back</button>
     </form>
 </div>
 @endsection
