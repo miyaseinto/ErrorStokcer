@@ -33,7 +33,7 @@
         </div>
         <div class="form-group">
           <label for="comment">Comment</label>
-          <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="30">{{$tweet->content}}</textarea>
+          <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="15">{{$tweet->content}}</textarea>
         </div>
 
         <input name="tweet_id" type="hidden" value="{{$tweet->id}}">

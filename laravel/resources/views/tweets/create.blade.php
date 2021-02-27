@@ -35,7 +35,7 @@
         
         <div class="form-group">
           <label for="comment">Comment:</label>
-          <textarea class="form-control" rows="30" id="comment" name="content"></textarea>
+          <textarea class="form-control" rows="15" id="comment" name="content"></textarea>
         </div>
 
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
