@@ -12,7 +12,12 @@
     @endif
     @if (isset($tweet->image))
       <div class="text-center">
-        <img src="{{asset('../storage/image/' . $tweet->image)}}" class="img-fluid img-thumbnail" >
+        <a href="{{asset('../storage/image/' . $tweet->image)}}" data-lightbox="group" >
+          <img src="{{asset('../storage/image/' . $tweet->image)}}" style="max-height: 300px;" class="img-thumbnail">
+        </a>
+      </div>
+      <div class="text-sm-right">
+        ※写真をクリックすると拡大します。
       </div>
     @else
     @endif
