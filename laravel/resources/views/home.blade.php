@@ -21,7 +21,7 @@
 <body>
 <main role="main">
 
-    <div class="jumbotron" style="position: relative; height: 70vh; min-height: 300px; background: url(../storage/image/main.jpg) no-repeat center center; background-size: cover;">
+    <div class="jumbotron" style="position: relative; height: 70vh; min-height: 300px; background: url('/image/main.jpg') no-repeat center center; background-size: cover;">
         <div class="text-left" style="position: relative; top: 50%; transform: translateY(-50%)">
             <span class= "text-center" style="color: #55c500; font-size:50px;">ErrorStocker!</span>
         </div>
