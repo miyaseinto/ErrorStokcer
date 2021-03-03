@@ -6,6 +6,7 @@ use App\Models\Tweet;
 use App\Models\Tag;
 use App\Models\Comment;
 use Illuminate\Http\Request;
+use Storage;
 
 
 use App\Http\Requests\TweetRequest;
@@ -26,19 +27,28 @@ class TweetController extends Controller
 
         if(isset($q['tag_name'])){
             $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(10);
+            $tags = \DB::table('tags')->get();  
             $tweets->load('user', 'tags');
 
             return view('tweets.index', [
                 'tweets' => $tweets,
+                'tags' => $tags,
                 'tag_name' => $q['tag_name']
             ]);
         }else {
      
             $tweets = Tweet::latest()->paginate(10);
+            $tags = \DB::table('tags')->get();  
             $tweets->load('user', 'tags');
+
+            $tags_name = [];
+            foreach ($tags as $tag) {
+                array_push($tags_name, $tag->tag_name);
+            }
             
             return view('tweets.index', [
                 'tweets' => $tweets,
+                'tags' => $tags
             ]);
 
         
@@ -64,21 +74,17 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
-
         $tweet = new Tweet;
         $tweet->user_id = $request->user_id;
         $tweet->content = $request->content;
         $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
 
-
-        // $imageName = str_shuffle($request->file('image')->getClientOriginalName()). '.' . $request->file('image')->getClientOriginalExtension(). '.' . $request->file('image')->getRealPath();//ファイル名をユニックするためstr_shuffleを使う
-        // dd($imageName);
-        
         
         if($request->image){
-            $filename = $request->file('image')->store('public/image');
-            $tweet->image = basename($filename);
+            $filename = $request->file('image');
+            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+            $tweet->image = Storage::disk('s3')->url($path);
         }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
@@ -94,12 +100,18 @@ class TweetController extends Controller
             array_push($tag_ids, $tag['id']);
         }
 
-        $tweet->save();
-        $tweet->tags()->attach($tag_ids);
+        $tag_count = count($tag_ids);
 
-        return redirect('/top');
 
-        
+        if ($tag_count <= 5){
+            $tweet->save();
+            $tweet->tags()->attach($tag_ids);
+    
+            return redirect('/top');
+        } else{
+            $tag_view = 'タグ数が５つ以上ですので変更してください。';
+            return view('tweets.tag', compact('tag_view'));
+        }
 
     }
 
@@ -155,8 +167,9 @@ class TweetController extends Controller
         $tweet->tag_box = $request->tag_box;
 
         if($request->image){
-            $filename = $request->file('image')->store('public/image');
-            $tweet->image = basename($filename);
+            $filename = $request->file('image');
+            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+            $tweet->image = Storage::disk('s3')->url($path);
         }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
@@ -172,10 +185,18 @@ class TweetController extends Controller
             array_push($tag_ids, $tag['id']);
         }
         
-        $tweet->tags()->sync($tag_ids);
 
-        $tweet->update();
-        return redirect('/top');
+        $tag_count = count($tag_ids);
+        if ($tag_count <= 5){
+            $tweet->save();
+            $tweet->tags()->attach($tag_ids);
+    
+            return redirect('/top');
+        } else{
+            $tag_view = 'タグ数が５つ以上ですので変更してください。';
+            $tweet_id = $id;
+            return view('tweets.tag-edit', compact('tag_view','tweet_id'));
+        }
 
     }
 
@@ -188,10 +209,8 @@ class TweetController extends Controller
     public function destroy($id)
     {
         $tweet = TWeet::find($id);
-        $tag = Tag::find($id);
-        $tweet->delete();
-        $tag->delete();
 
+        $tweet->delete();
 
         return redirect('/top');
     }
