@@ -168,7 +168,7 @@ class TweetController extends Controller
 
         if($request->image){
             $filename = $request->file('image');
-            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+            $path = Storage::disk('s3')->push($filename, file_get_contents($request->file));
             $tweet->image = Storage::disk('s3')->url($path);
         }
 
