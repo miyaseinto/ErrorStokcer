@@ -20,27 +20,29 @@
     <form action="{{ route('tweets.store') }}" method="POST" enctype="multipart/form-data">
           {{ csrf_field() }}
         <div class="form-group">
-          <label for="exampleInputEmail1">title</label>
+          <label for="exampleInputEmail1">タイトル(必須)</label>
           <input type="text" class="form-control" id="exampleInputEmail1" placeholder="title" name="title">
         </div>
         <div class="form-group">
-              <label for="tags">タグ</label>
-              <input id="tags" name="tag_box" class="form-control" type="text" >
+              <label for="tags">タグ(5個以下)</label>
+              <input id="tags" name="tag_box" class="form-control" type="text">
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlFile1">Example file input</label>
+          <label for="exampleFormControlFile1">写真（任意）</label>
           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image">
         </div>
+
         
         <div class="form-group">
-          <label for="comment">Comment:</label>
+          <label for="comment">内容(必須)</label>
+          
           <textarea class="form-control" rows="15" id="comment" name="content"></textarea>
         </div>
 
         <input type="hidden" name="user_id" value="{{ Auth::id() }}">
 
-        <button type="submit" class="btn btn-primary">Submit</button>
+        <button type="submit" class="btn btn-primary">送信</button>
     </form>
 </div>
 @endsection
