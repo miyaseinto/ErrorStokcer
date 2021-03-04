@@ -189,7 +189,7 @@ class TweetController extends Controller
         $tag_count = count($tag_ids);
         if ($tag_count <= 5){
             $tweet->save();
-            $tweet->tags()->attach($tag_ids);
+            $tweet->tags()->sync($tag_ids);
     
             return redirect('/top');
         } else{
@@ -208,11 +208,28 @@ class TweetController extends Controller
      */
     public function destroy($id)
     {
+
         $tweet = TWeet::find($id);
 
-        $tweet->delete();
 
+        preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $tweet->tag_box, $match);
+
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $found = Tag::firstOrCreate(['tag_name' => $tag]);
+            array_push($tags, $found);
+        }
+
+        $tag_ids = [];
+        foreach ($tags as $tag) {
+            array_push($tag_ids, $tag['id']);
+        }
+
+    
+        $tweet->tags()->delete($tag_ids);
+        $tweet->delete();
         return redirect('/top');
+
     }
 
     public function search(Request $request)

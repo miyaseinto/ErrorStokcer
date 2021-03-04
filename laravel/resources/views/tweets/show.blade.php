@@ -49,10 +49,10 @@
             </button>
             <div class="dropdown-menu">
               <a href="{{ route('tweets.edit', $tweet->id) }}" type="button" class="dropdown-item">編集</a>
-              <form action="{{ route('tweets.destroy', $tweet->id) }}" method="post" >
-                  {{ csrf_field() }}
-                  <input type="submit" value="削除" class="dropdown-item" >
-              </form>
+                <form action="{{ route('tweets.destroy',$tweet->id )}}" method="post" >
+                    {{ csrf_field() }}
+                    <input type="submit" value="削除" class="dropdown-item" >
+                </form>
               <a href="{{ route('comments.create', ['tweet_id' => $tweet->id]) }}" class="dropdown-item">コメント</a>
             </div>
           </div>  
