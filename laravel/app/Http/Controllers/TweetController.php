@@ -88,7 +88,7 @@ class TweetController extends Controller
                 $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
                 return view('tweets.tag', compact('tag_view'));
             }
-            $path = Storage::disk('s3')->put('myprefix', $filename, 'public');
+            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
         }
