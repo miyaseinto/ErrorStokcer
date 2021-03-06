@@ -12,8 +12,8 @@
     @endif
     @if (isset($tweet->image))
       <div class="text-center">
-        <a href="{{ url($tweet->image) }}" data-lightbox="group" >
-          <img src="{{ url($tweet->image) }}" style="max-height: 300px;" class="img-thumbnail">
+        <a href="{{ asset($tweet->image) }}" data-lightbox="group" >
+          <img src="{{ asset($tweet->image) }}" style="max-height: 300px;" class="img-thumbnail">
         </a>
       </div>
       <div class="text-sm-right">
