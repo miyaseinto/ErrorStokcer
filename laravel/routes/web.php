@@ -17,6 +17,12 @@ Route::get('/', function () {
     return view('home');
 });
 
+
+if (config('app.env') === 'production' or config('app.env') === 'staging') {
+    // asset()やurl()がhttpsで生成される
+    URL::forceScheme('https');
+}
+
 Auth::routes();
 Route::get('guest', 'App\Http\Controllers\Auth\LoginController@guestLogin')->name('login.guest');
 
