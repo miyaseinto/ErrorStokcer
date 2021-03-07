@@ -11,12 +11,12 @@
     <title>{{ config('app.name', 'ErrorStocker') }}</title>
 
     <!-- Scripts -->
-    <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="{{ secure_asset('js/app.js') }}" defer></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.3/css/all.css" integrity="sha384-UHRtZLI+pbxtHCWp1t77Bi1L4ZtiqrqD80Kn4Z8NTSRyMA2Fd33n5dQ8lWUE00s/" crossorigin="anonymous">
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="{{ secure_asset('css/app.css') }}" rel="stylesheet">
 </head>
 <body>
 <main role="main">
