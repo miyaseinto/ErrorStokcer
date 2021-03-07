@@ -21,15 +21,15 @@ URL: https://error-stocker.com
 <br />
 
 ## :thought_balloon: 制作背景
+エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。しかし、一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかを
 
 
 
-<br />
 ## :open_file_folder:機能動作
 
-|投稿一覧|投稿の詳細画面|自身の投稿内容|
-|---|---|---|
-|[![Image from Gyazo](https://i.gyazo.com/679379037d4f87d0962c01682ea1ed71.png)](https://gyazo.com/679379037d4f87d0962c01682ea1ed71)|[![Image from Gyazo](https://i.gyazo.com/8d820f2694e98e461c6f0a7f1105ada3.png)](https://gyazo.com/8d820f2694e98e461c6f0a7f1105ada3)|![Image from Gyazo](https://i.gyazo.com/292d05f5e4ea038981c1c8abf0f49ef2.jpg)|
+|投稿一覧|投稿の詳細画面|
+|---|---|
+|[![Image from Gyazo](https://i.gyazo.com/679379037d4f87d0962c01682ea1ed71.png)](https://gyazo.com/679379037d4f87d0962c01682ea1ed71)|[![Image from Gyazo](https://i.gyazo.com/8d820f2694e98e461c6f0a7f1105ada3.png)](https://gyazo.com/8d820f2694e98e461c6f0a7f1105ada3)|
 
 
 ### スマホ対応画面一覧
@@ -38,7 +38,6 @@ URL: https://error-stocker.com
 |![Image from Gyazo](https://i.gyazo.com/6aa29d8bf385138d2c4d9c52683d6b59.png)|![Image from Gyazo](https://i.gyazo.com/29b27833d09233fdd1d9f8c79b55c19e.png)|![Image from Gyazo](https://i.gyazo.com/9f07e4473dec68d682ae245593032480.png)|
 
 
-<br />
 ## :green_book:機能一覧
 
 ### ユーザー機能
@@ -61,7 +60,6 @@ URL: https://error-stocker.com
 - コメント内容にマークダウンを採用（cebe/markdown）
 
 
-<br />
 
 ## :notebook:使用技術
 ### フロントエンド
