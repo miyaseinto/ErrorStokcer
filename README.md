@@ -90,8 +90,7 @@ URL: https://error-stocker.com
 <br />
 
 ## :closed_book:ER図
-
-
+![Image from Gyazo](https://i.gyazo.com/1f0df171bea0f09482a0e037d8161c08.png)
 
 ## :orange_book:インフラ図
-
+![Image from Gyazo](https://i.gyazo.com/9d944e0eed0fbc8f156a3bb486dd38f5.png)
