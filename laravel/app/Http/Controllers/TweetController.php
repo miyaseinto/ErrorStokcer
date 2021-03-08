@@ -27,7 +27,7 @@ class TweetController extends Controller
 
         if(isset($q['tag_name'])){
             $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(10);
-            $tags = \DB::table('tags')->get();  
+            $tags = \DB::table('tags')->get();
             $tweets->load('user', 'tags');
 
             return view('tweets.index', [
@@ -247,10 +247,12 @@ class TweetController extends Controller
 
         $search_result = '【'. $request->search. '】の検索結果は'.$tweets->total().'件';
 
+        $tags = \DB::table('tags')->get();  
         return view('tweets.index',[
             'tweets' => $tweets,
             'search_result' => $search_result,
             'search_query'  => $request->search,
+            'tags' => $tags,
         ]);
     }
 }

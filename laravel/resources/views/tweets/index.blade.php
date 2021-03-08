@@ -14,12 +14,10 @@
 <div class="row m-3">
         <div class="col-sm-3">
         <h5 class="card-title"><i class="fas fa-tags"></i>タグ一覧</h5>
-            @foreach ($tweets as $tweet)
-                @foreach($tweet->tags as $tag)
-                    <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="btn btn-outline-success m-1">
-                        {{ $tag->tag_name }}
-                    </a>
-                @endforeach
+            @foreach($tags as $tag)
+                <a href="{{ route('tweets.index', ['tag_name' => $tag->tag_name]) }}" class="btn btn-outline-success m-1">
+                    {{ $tag->tag_name }}
+                </a>
             @endforeach
         </div>
         <div class="col-sm-9">
