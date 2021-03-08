@@ -29,13 +29,13 @@ URL: https://error-stocker.com
 
 |投稿一覧|投稿の詳細画面|
 |---|---|
-|[![Image from Gyazo](https://i.gyazo.com/679379037d4f87d0962c01682ea1ed71.png)](https://gyazo.com/679379037d4f87d0962c01682ea1ed71)|[![Image from Gyazo](https://i.gyazo.com/8d820f2694e98e461c6f0a7f1105ada3.png)](https://gyazo.com/8d820f2694e98e461c6f0a7f1105ada3)|
+|[![Image from Gyazo](https://i.gyazo.com/b8dd6a7350770b9dba1144ca90415e06.png)|
 
 
 ### スマホ対応画面一覧
 |メッセージ一覧|投稿一覧|投稿詳細|
 |---|---|---|
-|![Image from Gyazo](https://i.gyazo.com/6aa29d8bf385138d2c4d9c52683d6b59.png)|![Image from Gyazo](https://i.gyazo.com/29b27833d09233fdd1d9f8c79b55c19e.png)|![Image from Gyazo](https://i.gyazo.com/9f07e4473dec68d682ae245593032480.png)|
+
 
 
 ## :green_book:機能一覧
