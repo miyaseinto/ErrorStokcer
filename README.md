@@ -21,9 +21,12 @@ URL: https://error-stocker.com
 <br />
 
 ## :thought_balloon: 制作背景
-エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。しかし、一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかを
+エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。
+一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかを忘れる自体がありました。
+そこで、不便に感じていた箇所をより楽にすることを目指して作成し具現化したものがこのサイトです。
+他の人が投稿した発信やその他質問の回答を自分のファイルに入れていく感覚で使用したと考えたため作成に至りました。
 
-
+<br />
 
 ## :open_file_folder:機能動作
 
@@ -44,6 +47,8 @@ URL: https://error-stocker.com
 |---|---|---|
 |![Image from Gyazo](https://i.gyazo.com/76774a0a5f45a7b07600900c94cb6d56.png)|![Image from Gyazo](https://i.gyazo.com/6efacd3e624ba448dffc7b2af1025d0c.png)|![Image from Gyazo](https://i.gyazo.com/453e9f568452698271a6736d29723866.png)|
 
+
+<br />
 
 ## :green_book:機能一覧
 
@@ -94,3 +99,37 @@ URL: https://error-stocker.com
 
 ## :orange_book:インフラ図
 ![Image from Gyazo](https://i.gyazo.com/9d944e0eed0fbc8f156a3bb486dd38f5.png)
+
+
+## :bulb:今後の課題
+- Vue.jsの導入
+  - 検索機能の非同期通信
+  - コメント機能の非同期通信
+  - 新規投稿画面にプレビュー画面導入 
+- フォロー機能の導入
+- テストコードの導入
+- マイページのみの検索機能導入
+- ストック機能の導入
+  - 自分が投稿した情報と他者の投稿内容をストックする機能
+- CircleCiの導入
+
+<br />
+
+## :books:見てほしいPOINT
+2月6日〜3月8日までの30日間でPHPの勉強及びdockerの勉強・Laravelの勉強を行い、ポートフォリオ作成に移りました。
+2月6日までは、Ruby・Railsの勉強をやっており初めて触る言語で作成いたしました。
+スケジューリングとしては、以下の写真のとおりです。
+
+|2月6日〜2月8日|2月9日〜15日|2月16日〜2月22日|
+|:----------:|:----------------:|:------------:|
+|![IMG_1756](https://user-images.githubusercontent.com/67353242/110265464-fbed8480-7ffe-11eb-9bee-d149938c749e.jpeg)|![IMG_1757](https://user-images.githubusercontent.com/67353242/110265478-00b23880-7fff-11eb-9394-df861ecd8ec4.jpeg)|![IMG_1758](https://user-images.githubusercontent.com/67353242/110265493-060f8300-7fff-11eb-8c73-3e92cb26f314.jpeg)|
+
+|2月23〜3月1日|3月2日〜8日|
+|:------------:|:------------:|
+|![IMG_1759](https://user-images.githubusercontent.com/67353242/110265449-f1cb8600-7ffe-11eb-9e5f-8c548de0211f.jpeg)|![IMG_1760](https://user-images.githubusercontent.com/67353242/110265925-0f4d1f80-8000-11eb-986d-e616a02d0b1c.jpeg)|
+
+- PHP基礎勉強に費やした時間：31時間11分（2月6日〜2月11日）
+- Docker勉強に費やした時間：8時間10分(2月7・11・12日)
+- Laravel基礎勉強（動画見ながらのハンズオン）に費やした時間：31時間24分(2月11〜18日)
+- ErrorStocker作成に費やした時間：111時間4分(2月18日〜3月8日)
+- 合計時間：183時間
