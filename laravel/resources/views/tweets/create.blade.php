@@ -21,11 +21,11 @@
           {{ csrf_field() }}
         <div class="form-group">
           <label for="exampleInputEmail1">タイトル(必須)</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="title" name="title">
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="〇〇エラーについて" name="title">
         </div>
         <div class="form-group">
-              <label for="tags">タグ(5個以下)</label>
-              <input id="tags" name="tag_box" class="form-control" type="text">
+              <label for="tags">タグ(5個以下・#で区切ってください)</label>
+              <input id="tags" name="tag_box" class="form-control" placeholder="#〇〇" type="text">
         </div>
 
         <div class="form-group">
@@ -35,8 +35,8 @@
 
         
         <div class="form-group">
-          <label for="comment">内容(必須)</label>
-          
+          <label for="comment">内容(必須・マークダウン記法で記述できます)</label>
+          <a href="https://ja.wikipedia.org/wiki/Markdown" class="btn btn-outline-success p-0">マークダウン記法について<a>
           <textarea class="form-control" rows="15" id="comment" name="content"></textarea>
         </div>
 

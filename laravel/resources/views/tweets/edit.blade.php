@@ -21,18 +21,19 @@
           {{ csrf_field() }}
         <div class="form-group">
           <label for="exampleInputEmail1">タイトル(必須)</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" name="title" value="{{ $tweet->title }}">
+          <input type="text" class="form-control" id="exampleInputEmail1" placeholder="〇〇エラーについて" name="title" value="{{ $tweet->title }}">
         </div>
         <div class="form-group">
-          <label for="tags">タグ(5個以下)</label>
-          <input id="tags" name="tag_box" class="form-control" type="text" value="{{ $tweet->tag_box }}">
+          <label for="tags">タグ(5個以下・#で区切ってください)</label>
+          <input id="tags" name="tag_box" class="form-control" type="text" placeholder="#〇〇" value="{{ $tweet->tag_box }}">
         </div>
         <div class="form-group">
           <label for="exampleFormControlFile1">写真（任意）</label>
           <input type="file" class="form-control-file" id="exampleFormControlFile1" name="image" >
         </div>
         <div class="form-group">
-          <label for="comment">内容(必須)</label>
+          <label for="comment">内容(必須・マークダウン記法で記述できます)</label>
+          <a href="https://ja.wikipedia.org/wiki/Markdown" class="btn btn-outline-success p-0">マークダウン記法について<a>
           <textarea class="form-control" name="content" id="exampleFormControlTextarea1" rows="15">{{$tweet->content}}</textarea>
         </div>
 
