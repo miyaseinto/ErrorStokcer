@@ -6,8 +6,7 @@ ErrorStockerとは、文字通りエラーを保存する為のアプリケー�
 ## :globe_with_meridians: URL
 URL: https://error-stocker.com
 
-使用方法
-閲覧用とログインして使用できる２パターンがあります。閲覧用は、閲覧Buttonをクリックすると使用できます。ただ、投稿することはできません。投稿する場合はログインしてからしかできません。投稿をする際は、タイトル・タグ（任意）・写真（任意）・内容を投稿することができます。内容を記述する際は、markdown記法で投稿できるようにしてます。
+使用方法は閲覧用とログインして使用できる２パターンがあります。閲覧用は、閲覧Buttonをクリックすると使用できます。ただ、投稿することはできません。投稿する場合はログインしてからしかできません。投稿をする際は、タイトル・タグ（任意）・写真（任意）・内容を投稿することができます。内容を記述する際は、markdown記法で投稿できるようにしてます。
 
 <br />
 
@@ -21,22 +20,34 @@ URL: https://error-stocker.com
 <br />
 
 ## :thought_balloon: 制作背景
-エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。しかし、一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかを
+エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。
+一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかといった自体がありました。
+そこで、不便に感じていた箇所をより楽にすることを目指して作成し具現化したものがこのサイトです。
+他の人が投稿した発信やその他質問の回答を自分のファイルに入れていく感覚で使用したと考えたため作成に至りました。これを使用することで時間の短縮につながると考えております
 
-
+<br />
 
 ## :open_file_folder:機能動作
 
-|投稿一覧|投稿の詳細画面|
+|新規投稿|投稿一覧|
 |---|---|
-|[![Image from Gyazo](https://i.gyazo.com/679379037d4f87d0962c01682ea1ed71.png)](https://gyazo.com/679379037d4f87d0962c01682ea1ed71)|[![Image from Gyazo](https://i.gyazo.com/8d820f2694e98e461c6f0a7f1105ada3.png)](https://gyazo.com/8d820f2694e98e461c6f0a7f1105ada3)|
+|![Image from Gyazo](https://i.gyazo.com/b8dd6a7350770b9dba1144ca90415e06.png)|![Image from Gyazo](https://i.gyazo.com/949997d7f695203026d5510d031a7160.png)|
 
+|投稿詳細|マイページ詳細|
+|---|---|
+|![Image from Gyazo](https://i.gyazo.com/dd4d4be0777cb65499f395c929ee4f79.png)|![Image from Gyazo](https://i.gyazo.com/a8bd6f944fff2a68d0a0fb0923435d08.png)|
+
+|検索画面|コメント画面|
+|---|---|
+|![Image from Gyazo](https://i.gyazo.com/d44ba633c6f62d76e2c9318652e0a8bf.png)|![Image from Gyazo](https://i.gyazo.com/d68ce695f76e993b0f249d4e863e4423.png)|
 
 ### スマホ対応画面一覧
-|メッセージ一覧|投稿一覧|投稿詳細|
+|投稿一覧|投稿詳細|検索画面|
 |---|---|---|
-|![Image from Gyazo](https://i.gyazo.com/6aa29d8bf385138d2c4d9c52683d6b59.png)|![Image from Gyazo](https://i.gyazo.com/29b27833d09233fdd1d9f8c79b55c19e.png)|![Image from Gyazo](https://i.gyazo.com/9f07e4473dec68d682ae245593032480.png)|
+|![Image from Gyazo](https://i.gyazo.com/76774a0a5f45a7b07600900c94cb6d56.png)|![Image from Gyazo](https://i.gyazo.com/6efacd3e624ba448dffc7b2af1025d0c.png)|![Image from Gyazo](https://i.gyazo.com/453e9f568452698271a6736d29723866.png)|
 
+
+<br />
 
 ## :green_book:機能一覧
 
@@ -83,8 +94,41 @@ URL: https://error-stocker.com
 <br />
 
 ## :closed_book:ER図
-
-
+![Image from Gyazo](https://i.gyazo.com/1f0df171bea0f09482a0e037d8161c08.png)
 
 ## :orange_book:インフラ図
+![Image from Gyazo](https://i.gyazo.com/9d944e0eed0fbc8f156a3bb486dd38f5.png)
 
+
+## :bulb:今後の課題
+- Vue.jsの導入
+  - 検索機能の非同期通信
+  - コメント機能の非同期通信
+  - 新規投稿画面にプレビュー画面導入 
+- フォロー機能の導入
+- テストコードの導入
+- マイページのみの検索機能導入
+- ストック機能の導入
+  - 自分が投稿した情報と他者の投稿内容をストックする機能
+- CircleCiの導入
+
+<br />
+
+## :books:見てほしいPOINT
+2月6日〜3月8日までの30日間でPHPの勉強及びdockerの勉強・Laravelの勉強を行い、ポートフォリオ作成に移りました。
+2月6日までは、Ruby・Railsの勉強を行っており初めて触る言語で作成いたしました。
+スケジューリングとしては、以下の写真のとおりです。
+
+|2月6日〜2月8日|2月9日〜15日|2月16日〜2月22日|
+|:----------:|:----------------:|:------------:|
+|![IMG_1756](https://user-images.githubusercontent.com/67353242/110265464-fbed8480-7ffe-11eb-9bee-d149938c749e.jpeg)|![IMG_1757](https://user-images.githubusercontent.com/67353242/110265478-00b23880-7fff-11eb-9394-df861ecd8ec4.jpeg)|![IMG_1758](https://user-images.githubusercontent.com/67353242/110265493-060f8300-7fff-11eb-8c73-3e92cb26f314.jpeg)|
+
+|2月23〜3月1日|3月2日〜8日|
+|:------------:|:------------:|
+|![IMG_1759](https://user-images.githubusercontent.com/67353242/110265449-f1cb8600-7ffe-11eb-9e5f-8c548de0211f.jpeg)|![IMG_1760](https://user-images.githubusercontent.com/67353242/110265925-0f4d1f80-8000-11eb-986d-e616a02d0b1c.jpeg)|
+
+- PHP基礎勉強に費やした時間：31時間11分（2月6日〜2月11日）
+- Docker勉強に費やした時間：8時間10分(2月7・11・12日)
+- Laravel基礎勉強（動画見ながらのハンズオン）に費やした時間：31時間24分(2月11〜18日)
+- ErrorStocker作成に費やした時間：111時間4分(2月18日〜3月8日)
+- 合計時間：183時間
