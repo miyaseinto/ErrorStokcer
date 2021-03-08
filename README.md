@@ -27,15 +27,22 @@ URL: https://error-stocker.com
 
 ## :open_file_folder:機能動作
 
-|投稿一覧|投稿の詳細画面|
+|新規投稿|投稿一覧|
 |---|---|
-|[![Image from Gyazo](https://i.gyazo.com/b8dd6a7350770b9dba1144ca90415e06.png)|
+|![Image from Gyazo](https://i.gyazo.com/b8dd6a7350770b9dba1144ca90415e06.png)|![Image from Gyazo](https://i.gyazo.com/949997d7f695203026d5510d031a7160.png)|
 
+|投稿詳細|マイページ詳細|
+|---|---|
+|![Image from Gyazo](https://i.gyazo.com/dd4d4be0777cb65499f395c929ee4f79.png)|![Image from Gyazo](https://i.gyazo.com/a8bd6f944fff2a68d0a0fb0923435d08.png)|
+
+|検索画面|コメント画面|
+|---|---|
+|![Image from Gyazo](https://i.gyazo.com/d44ba633c6f62d76e2c9318652e0a8bf.png)|![Image from Gyazo](https://i.gyazo.com/d68ce695f76e993b0f249d4e863e4423.png)|
 
 ### スマホ対応画面一覧
-|メッセージ一覧|投稿一覧|投稿詳細|
+|投稿一覧|投稿詳細|検索画面|
 |---|---|---|
-
+|![Image from Gyazo](https://i.gyazo.com/76774a0a5f45a7b07600900c94cb6d56.png)|![Image from Gyazo](https://i.gyazo.com/6efacd3e624ba448dffc7b2af1025d0c.png)|![Image from Gyazo](https://i.gyazo.com/453e9f568452698271a6736d29723866.png)|
 
 
 ## :green_book:機能一覧
