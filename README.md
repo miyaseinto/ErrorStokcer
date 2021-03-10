@@ -89,7 +89,7 @@ URL: http://error-st.com
 - docker-compose 1.27.4
 
 ### 本番環境
-- AWS(VPC、IAM、ALB、EC2、S3、Route53) 
+- AWS(VPC、EC2、S3、Route53) 
 - Nginx
 
 <br />
