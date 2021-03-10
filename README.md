@@ -4,7 +4,7 @@ ErrorStockerとは、文字通りエラーを保存する為のアプリケー�
 <br />
 
 ## :globe_with_meridians: URL
-URL: http://error-stocker.com
+URL: http://error-st.com
 <br />
 URL: http://54.150.239.241
 
