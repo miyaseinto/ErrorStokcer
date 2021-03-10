@@ -4,7 +4,7 @@ ErrorStockerとは、文字通りエラーを保存する為のアプリケー�
 <br />
 
 ## :globe_with_meridians: URL
-URL: ~~https://error-stocker.com~~ ←エラーが生じたため下記のurlでアクセスしてください。エラーの解決は現在おこなている状態です。
+URL: http://error-stocker.com
 <br />
 URL: http://54.150.239.241
 
@@ -100,7 +100,7 @@ URL: http://54.150.239.241
 ![Image from Gyazo](https://i.gyazo.com/1f0df171bea0f09482a0e037d8161c08.png)
 
 ## :orange_book:インフラ図
-![Image from Gyazo](https://i.gyazo.com/9d944e0eed0fbc8f156a3bb486dd38f5.png)
+![Image from Gyazo](https://i.gyazo.com/347d5195435c9fd06dcc9ef553f85b1b.png)
 
 
 ## :bulb:今後の課題
