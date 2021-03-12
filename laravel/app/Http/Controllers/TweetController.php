@@ -7,6 +7,7 @@ use App\Models\Tag;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Storage;
+use InterventionImage;
 
 
 use App\Http\Requests\TweetRequest;
@@ -80,7 +81,7 @@ class TweetController extends Controller
         $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
 
-        
+
         if($request->image){
             $filename = $request->file('image');
             $ext = substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1);
@@ -88,7 +89,36 @@ class TweetController extends Controller
                 $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
                 return view('tweets.tag', compact('tag_view'));
             }
-            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+            
+            $image = \Image::make($filename);
+            
+
+            $image->orientate();
+            // リサイズする
+            $image->resize(600, null,
+            function ($constraint) {
+                // 縦横比を保持したままにする
+                $constraint->aspectRatio();
+                // 小さい画像は大きくしない
+                $constraint->upsize();
+            }
+            );
+
+            $file = $request->file('img');
+            $quality = 80;
+            $size = 1024000;
+
+            $image = Image::make($path);
+            if($image->filesize() > $size){
+                $quality -= 5;
+                return $this->compressImage($img_file, $path, $quality, $size);
+            }
+
+            
+            dd($image->filesize());
+
+
+            $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
         }
@@ -151,6 +181,7 @@ class TweetController extends Controller
     public function edit($id)
     {
         $tweet = Tweet::findOrFail($id);
+        $tweet->load('user','comments');
         return view('tweets.edit',[
             'tweet' => $tweet,
         ]);
