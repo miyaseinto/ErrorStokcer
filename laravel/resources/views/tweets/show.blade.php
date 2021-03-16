@@ -10,7 +10,6 @@
             {{ session('status') }}
         </div>
     @endif
-    <?php dd(($tweet->image)); ?>
     @if (isset($tweet->image))
       <div class="text-center">
         <a href="{{ asset($tweet->image) }}" data-lightbox="group" >

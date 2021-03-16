@@ -8,7 +8,8 @@ use App\Models\Comment;
 use Illuminate\Http\Request;
 use Storage;
 use InterventionImage;
-
+use Image;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\TweetRequest;
 
@@ -80,48 +81,31 @@ class TweetController extends Controller
         $tweet->content = $request->content;
         $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
-
-
-        if($request->image){
+        
+        if($request->hasFile('image')){
             $filename = $request->file('image');
+            $name = $filename->getClientOriginalName(); 
             $ext = substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1);
             if(strtolower($ext) !== 'png' && strtolower($ext) !== 'jpg' && strtolower($ext) !== 'gif' && strtolower($ext) !== 'jpeg'){
                 $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
                 return view('tweets.tag', compact('tag_view'));
             }
+
+
+            // 画像を横幅300px・縦幅アスペクト比維持の自動サイズへリサイズして一時ファイル保存先へ格納
+            $tmpFile = time(). '_' . $name;
+            $tmpPath = storage_path('app/tmp/') . $tmpFile;
+            $image = Image::make($filename)
+                ->resize(300, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                })
+                ->save($tmpPath);
             
-            $image = \Image::make($filename);
-            
-
-            $image->orientate();
-            // リサイズする
-            $image->resize(600, null,
-            function ($constraint) {
-                // 縦横比を保持したままにする
-                $constraint->aspectRatio();
-                // 小さい画像は大きくしない
-                $constraint->upsize();
-            }
-            );
-
-            $file = $request->file('img');
-            $quality = 80;
-            $size = 1024000;
-
-            $image = Image::make($path);
-            if($image->filesize() > $size){
-                $quality -= 5;
-                return $this->compressImage($img_file, $path, $quality, $size);
-            }
-
-            
-            dd($image->filesize());
-
-
-            $path = Storage::disk('s3')->putFile('myprefix', $image, 'public');
+            $path = Storage::disk('s3')->putFileAs('myprefix',$tmpPath, "{$tmpFile}");
             $tweet->image = Storage::disk('s3')->url($path);
 
-        }
+            Storage::disk('local')->delete('tmp/' . $tmpFile);
+        } 
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
@@ -148,8 +132,7 @@ class TweetController extends Controller
             $tag_view = 'タグ数が５つ以上ですので変更してください。';
             return view('tweets.tag', compact('tag_view'));
         }
-
-    }
+}
 
     /**
      * Display the specified resource.
