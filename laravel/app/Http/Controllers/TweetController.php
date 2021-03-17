@@ -38,22 +38,22 @@ class TweetController extends Controller
                 'tag_name' => $q['tag_name']
             ]);
         }else {
-     
+
             $tweets = Tweet::latest()->paginate(10);
-            $tags = \DB::table('tags')->get();  
+            $tags = \DB::table('tags')->get();
             $tweets->load('user', 'tags');
 
             $tags_name = [];
             foreach ($tags as $tag) {
                 array_push($tags_name, $tag->tag_name);
             }
-            
+
             return view('tweets.index', [
                 'tweets' => $tweets,
                 'tags' => $tags
             ]);
 
-        
+
         }
     }
 
@@ -76,17 +76,14 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
-        $tweet = new Tweet;
-        $tweet->user_id = $request->user_id;
-        $tweet->content = $request->content;
-        $tweet->tag_box = $request->tag_box;
-        $tweet->title = $request->title;
-        
+      
+        $tweet = Tweet::create($request->validated());
+      
         if($request->hasFile('image')){
             $filename = $request->file('image');
             $name = $filename->getClientOriginalName(); 
-            $ext = substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1);
-            if(strtolower($ext) !== 'png' && strtolower($ext) !== 'jpg' && strtolower($ext) !== 'gif' && strtolower($ext) !== 'jpeg'){
+            $ext = strtolower(substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1));
+            if(!in_array($ext, ['png', 'jpg', 'gif', 'jpeg'], true)) {
                 $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
                 return view('tweets.tag', compact('tag_view'));
             }
@@ -110,30 +107,20 @@ class TweetController extends Controller
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
-        $tags = [];
-        foreach ($match[1] as $tag) {
-            $found = Tag::firstOrCreate(['tag_name' => $tag]);
-            array_push($tags, $found);
-        }
+        $tags = collect($match[1])->map(function($tag){ return Tag::firstOrCreate(['tag_name' => $tag]); });
+        $tag_ids = $tags->get('id');
+        $tag_count = $tags->count();
 
-        $tag_ids = [];
-        foreach ($tags as $tag) {
-            array_push($tag_ids, $tag['id']);
-        }
-
-        $tag_count = count($tag_ids);
-
-
-        if ($tag_count <= 5){
-            $tweet->save();
-            $tweet->tags()->attach($tag_ids);
-    
-            return redirect('/top');
-        } else{
+        if($tags->count() >= 5) {
             $tag_view = 'タグ数が５つ以上ですので変更してください。';
             return view('tweets.tag', compact('tag_view'));
         }
-}
+
+        $tweet->save();
+        $tweet->tags()->attach($tag_ids);
+
+        return redirect('/top');
+    }
 
     /**
      * Display the specified resource.
@@ -205,13 +192,13 @@ class TweetController extends Controller
         foreach ($tags as $tag) {
             array_push($tag_ids, $tag['id']);
         }
-        
+
 
         $tag_count = count($tag_ids);
         if ($tag_count <= 5){
             $tweet->save();
             $tweet->tags()->sync($tag_ids);
-    
+
             return redirect('/top');
         } else{
             $tag_view = 'タグ数が５つ以上ですので変更してください。';
@@ -246,7 +233,7 @@ class TweetController extends Controller
             array_push($tag_ids, $tag['id']);
         }
 
-    
+
         $tweet->tags()->delete($tag_ids);
         $tweet->delete();
         return redirect('/top');
@@ -262,7 +249,7 @@ class TweetController extends Controller
 
         $search_result = '【'. $request->search. '】の検索結果は'.$tweets->total().'件';
 
-        $tags = \DB::table('tags')->get();  
+        $tags = \DB::table('tags')->get();
         return view('tweets.index',[
             'tweets' => $tweets,
             'search_result' => $search_result,

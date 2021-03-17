@@ -4,7 +4,8 @@ ErrorStockerとは、文字通りエラーを保存する為のアプリケー�
 <br />
 
 ## :globe_with_meridians: URL
-URL: https://error-stocker.com
+URL: http://error-st.com
+
 
 使用方法は閲覧用とログインして使用できる２パターンがあります。閲覧用は、閲覧Buttonをクリックすると使用できます。ただ、投稿することはできません。投稿する場合はログインしてからしかできません。投稿をする際は、タイトル・タグ（任意）・写真（任意）・内容を投稿することができます。内容を記述する際は、markdown記法で投稿できるようにしてます。
 
@@ -22,8 +23,8 @@ URL: https://error-stocker.com
 ## :thought_balloon: 制作背景
 エラーが生じた際にリファレンスサイト・Qiita等から解決策を探して解決に導くこの流れで開発に励んでいました。
 一度エラーを解決した内容や勉強した内容等をGoogleのブックマークやQiitaでストックしておりましたが、どこにその情報を入れたかといった自体がありました。
-そこで、不便に感じていた箇所をより楽にすることを目指して作成し具現化したものがこのサイトです。
-他の人が投稿した発信やその他質問の回答を自分のファイルに入れていく感覚で使用したと考えたため作成に至りました。これを使用することで時間の短縮につながると考えております
+そこで、不便に感じていた箇所をより楽にすることを目指して具現化したものがこのサイトです。
+他の人が投稿した発信やその他質問の回答を自分のファイルに入れていく感覚で使用したと考えたため作成に至りました。これを使用することで時間の短縮につながると考えております。
 
 <br />
 
@@ -88,7 +89,7 @@ URL: https://error-stocker.com
 - docker-compose 1.27.4
 
 ### 本番環境
-- AWS(VPC、IAM、ALB、EC2、S3、Route53) 
+- AWS(VPC、EC2、S3、Route53) 
 - Nginx
 
 <br />
@@ -97,7 +98,7 @@ URL: https://error-stocker.com
 ![Image from Gyazo](https://i.gyazo.com/1f0df171bea0f09482a0e037d8161c08.png)
 
 ## :orange_book:インフラ図
-![Image from Gyazo](https://i.gyazo.com/9d944e0eed0fbc8f156a3bb486dd38f5.png)
+![Image from Gyazo](https://i.gyazo.com/347d5195435c9fd06dcc9ef553f85b1b.png)
 
 
 ## :bulb:今後の課題
