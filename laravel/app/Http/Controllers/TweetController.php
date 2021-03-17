@@ -76,8 +76,11 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
-      
-        $tweet = Tweet::create($request->validated());
+        $tweet = new Tweet;
+        $tweet->user_id = $request->user_id;
+        $tweet->content = $request->content;
+        $tweet->tag_box = $request->tag_box;
+        $tweet->title = $request->title;
       
         if($request->hasFile('image')){
             $filename = $request->file('image');
@@ -88,11 +91,10 @@ class TweetController extends Controller
                 return view('tweets.tag', compact('tag_view'));
             }
 
-            
             $tmpFile = time(). '_' . $name;
             $tmpPath = storage_path('app/tmp/') . $tmpFile;
             $image = Image::make($filename)
-                ->resize(1200, null, function ($constraint) {
+                ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
@@ -107,19 +109,28 @@ class TweetController extends Controller
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
-        $tags = collect($match[1])->map(function($tag){ return Tag::firstOrCreate(['tag_name' => $tag]); });
-        $tag_ids = $tags->get('id');
-        $tag_count = $tags->count();
-
-        if($tags->count() >= 5) {
-            $tag_view = 'タグ数が５つ以上ですので変更してください。';
-            return view('tweets.tag', compact('tag_view'));
+        $tags = [];
+        foreach ($match[1] as $tag) {
+            $found = Tag::firstOrCreate(['tag_name' => $tag]);
+            array_push($tags, $found);
         }
 
-        $tweet->save();
-        $tweet->tags()->attach($tag_ids);
+        $tag_ids = [];
+        foreach ($tags as $tag) {
+            array_push($tag_ids, $tag['id']);
+        }
 
-        return redirect('/top');
+        $tag_count = count($tag_ids);
+        if ($tag_count <= 5){
+            $tweet->save();
+            $tweet->tags()->attach($tag_ids);
+
+            return redirect('/top');
+        } else{
+            $tag_view = 'タグ数が５つ以上ですので変更してください。';
+            $tweet_id = $id;
+            return view('tweets.tag-edit', compact('tag_view','tweet_id'));
+        }
     }
 
     /**
@@ -174,10 +185,29 @@ class TweetController extends Controller
         $tweet->user_id = $request->user_id;
         $tweet->tag_box = $request->tag_box;
 
-        if($request->image){
+        if($request->hasFile('image')){
             $filename = $request->file('image');
-            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+            $name = $filename->getClientOriginalName(); 
+            $ext = strtolower(substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1));
+            if(!in_array($ext, ['png', 'jpg', 'gif', 'jpeg'], true)) {
+                $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
+                return view('tweets.tag', compact('tag_view'));
+            }
+
+            $tmpFile = time(). '_' . $name;
+            $tmpPath = storage_path('app/tmp/') . $tmpFile;
+            $image = Image::make($filename)
+                ->resize(1000, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->orientate()
+                ->save($tmpPath);
+
+            $path = Storage::disk('s3')->putFile('myprefix',$tmpPath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
+
+            Storage::disk('local')->delete('tmp/' . $tmpFile);
         }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
