@@ -91,17 +91,18 @@ class TweetController extends Controller
                 return view('tweets.tag', compact('tag_view'));
             }
 
-
-            // 画像を横幅300px・縦幅アスペクト比維持の自動サイズへリサイズして一時ファイル保存先へ格納
+            
             $tmpFile = time(). '_' . $name;
             $tmpPath = storage_path('app/tmp/') . $tmpFile;
             $image = Image::make($filename)
-                ->resize(300, null, function ($constraint) {
+                ->resize(1200, null, function ($constraint) {
                     $constraint->aspectRatio();
+                    $constraint->upsize();
                 })
+                ->orientate()
                 ->save($tmpPath);
-            
-            $path = Storage::disk('s3')->putFileAs('myprefix',$tmpPath, "{$tmpFile}");
+
+            $path = Storage::disk('s3')->putFile('myprefix',$tmpPath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
             Storage::disk('local')->delete('tmp/' . $tmpFile);
