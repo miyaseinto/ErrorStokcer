@@ -7,7 +7,9 @@ use App\Models\Tag;
 use App\Models\Comment;
 use Illuminate\Http\Request;
 use Storage;
-
+use InterventionImage;
+use Image;
+use Illuminate\Support\Str;
 
 use App\Http\Requests\TweetRequest;
 
@@ -74,19 +76,34 @@ class TweetController extends Controller
      */
     public function store(TweetRequest $request)
     {
+      
         $tweet = Tweet::create($request->validated());
-
-        if($request->file('image')){
+      
+        if($request->hasFile('image')){
             $filename = $request->file('image');
+            $name = $filename->getClientOriginalName(); 
             $ext = strtolower(substr($filename->getClientOriginalName(), strrpos($filename->getClientOriginalName(), '.')+1));
             if(!in_array($ext, ['png', 'jpg', 'gif', 'jpeg'], true)) {
                 $tag_view = '画像以外のファイルが指定されています。画像ファイル(png/jpg/jpeg/gif)を指定して下さい';
                 return view('tweets.tag', compact('tag_view'));
             }
-            $path = Storage::disk('s3')->putFile('myprefix', $filename, 'public');
+
+            
+            $tmpFile = time(). '_' . $name;
+            $tmpPath = storage_path('app/tmp/') . $tmpFile;
+            $image = Image::make($filename)
+                ->resize(1200, null, function ($constraint) {
+                    $constraint->aspectRatio();
+                    $constraint->upsize();
+                })
+                ->orientate()
+                ->save($tmpPath);
+
+            $path = Storage::disk('s3')->putFile('myprefix',$tmpPath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
-        }
+            Storage::disk('local')->delete('tmp/' . $tmpFile);
+        } 
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
 
@@ -135,6 +152,7 @@ class TweetController extends Controller
     public function edit($id)
     {
         $tweet = Tweet::findOrFail($id);
+        $tweet->load('user','comments');
         return view('tweets.edit',[
             'tweet' => $tweet,
         ]);
