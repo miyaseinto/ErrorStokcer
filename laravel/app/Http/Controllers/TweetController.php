@@ -92,7 +92,7 @@ class TweetController extends Controller
             }
 
             $tmpFile = time(). '_' . $name;
-            $tmpPath = storage_path('app/storage/') . $tmpFile;
+            $tmpPath = storage_path('app/public/') . $tmpFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -195,7 +195,7 @@ class TweetController extends Controller
             }
 
             $tmpFile = time(). '_' . $name;
-            $tmpPath = storage_path('app/storage/') . $tmpFile;
+            $tmpPath = storage_path('app/public/') . $tmpFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
