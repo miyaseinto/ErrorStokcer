@@ -28,9 +28,8 @@ class TweetController extends Controller
 
 
         if(isset($q['tag_name'])){
-            $tweets = Tweet::latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(10);
+            $tweets = Tweet::with(['user', 'tags'])->latest()->where('tag_box', 'like', "%{$q['tag_name']}%")->paginate(10);
             $tags = \DB::table('tags')->get();
-            $tweets->load('user', 'tags');
 
             return view('tweets.index', [
                 'tweets' => $tweets,
@@ -39,9 +38,8 @@ class TweetController extends Controller
             ]);
         }else {
 
-            $tweets = Tweet::latest()->paginate(10);
+            $tweets = Tweet::with(['user', 'tags'])->latest()->paginate(10);
             $tags = \DB::table('tags')->get();
-            $tweets->load('user', 'tags');
 
             $tags_name = [];
             foreach ($tags as $tag) {
@@ -145,8 +143,6 @@ class TweetController extends Controller
         $tweetid = $tweet->id;
         $comments = Comment::where('tweet_id', '=', $tweetid)->get();
 
-        $tweet->load('user','comments');
-
         return view('tweets.show',[
             'tweet' => $tweet,
             'comments' => $comments,
@@ -162,8 +158,7 @@ class TweetController extends Controller
      */
     public function edit($id)
     {
-        $tweet = Tweet::findOrFail($id);
-        $tweet->load('user','comments');
+        $tweet = Tweet::with(['user','comments'])->findOrFail($id);
         return view('tweets.edit',[
             'tweet' => $tweet,
         ]);
