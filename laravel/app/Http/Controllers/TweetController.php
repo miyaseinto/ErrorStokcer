@@ -90,7 +90,7 @@ class TweetController extends Controller
             }
 
             $imageFile = time(). '_' . $name;
-            $imagePath = storage_path('app/public/image/') . $imageFile;
+            $imagePath = storage_path('app/public/') . $imageFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();//横幅を1000にして縦横比を保持したまま変更を行う。
@@ -102,7 +102,7 @@ class TweetController extends Controller
             $path = Storage::disk('s3')->putFile('myprefix',$imagePath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
-            Storage::disk('local')->delete('app/public/image/' . $imageFile);
+            Storage::disk('local')->delete('app/public/' . $imageFile);
         } 
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
@@ -190,7 +190,7 @@ class TweetController extends Controller
             }
 
             $imageFile = time(). '_' . $name;
-            $imagePath = storage_path('app/public/image/') . $imageFile;
+            $imagePath = storage_path('app/public/') . $imageFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
@@ -202,7 +202,7 @@ class TweetController extends Controller
             $path = Storage::disk('s3')->putFile('myprefix',$imagePath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
-            Storage::disk('local')->delete('app/public/image/' . $imageFile);
+            Storage::disk('local')->delete('app/public/' . $imageFile);
         }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
