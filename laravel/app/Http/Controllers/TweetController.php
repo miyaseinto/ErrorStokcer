@@ -93,10 +93,10 @@ class TweetController extends Controller
             $imagePath = storage_path('app/public/image/') . $imageFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
-                    $constraint->aspectRatio();
-                    $constraint->upsize();
+                    $constraint->aspectRatio();//横幅を1000にして縦横比を保持したまま変更を行う。
+                    $constraint->upsize();//小さい写真を無理やり1000にすることをせずにそのままのサイズを維持する。
                 })
-                ->orientate()
+                ->orientate()//画像の向きを自動的に調整する。
                 ->save($imagePath);
 
             $path = Storage::disk('s3')->putFile('myprefix',$imagePath, 'public');
