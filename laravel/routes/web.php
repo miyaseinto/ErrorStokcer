@@ -31,7 +31,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::resource('/users', 'App\Http\Controllers\UserController', ['only' => ['show']]);
 
     Route::resource('/tweets', 'App\Http\Controllers\TweetController', ['except' => ['index','edit','update','destroy ']]);
-    Route::get('sample/member/{member_id?}', 'SampleController@member');
     Route::get('tweets/edit/{id}', 'App\Http\Controllers\TweetController@edit')->name('tweets.edit');
     Route::post('tweets/edit', 'App\Http\Controllers\TweetController@update')->name('tweets.update');
     Route::post('tweets/delete/{id}/{tag_id?}', 'App\Http\Controllers\TweetController@destroy')->name('tweets.destroy');

@@ -89,20 +89,20 @@ class TweetController extends Controller
                 return view('tweets.tag', compact('tag_view'));
             }
 
-            $tmpFile = time(). '_' . $name;
-            $tmpPath = storage_path('app/public/') . $tmpFile;
+            $imageFile = time(). '_' . $name;
+            $imagePath = storage_path('app/public/image/') . $imageFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
                 ->orientate()
-                ->save($tmpPath);
+                ->save($imagePath);
 
-            $path = Storage::disk('s3')->putFile('myprefix',$tmpPath, 'public');
+            $path = Storage::disk('s3')->putFile('myprefix',$imagePath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
-            Storage::disk('local')->delete('tmp/' . $tmpFile);
+            Storage::disk('local')->delete('app/public/image/' . $imageFile);
         } 
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
@@ -189,20 +189,20 @@ class TweetController extends Controller
                 return view('tweets.tag', compact('tag_view'));
             }
 
-            $tmpFile = time(). '_' . $name;
-            $tmpPath = storage_path('app/public/') . $tmpFile;
+            $imageFile = time(). '_' . $name;
+            $imagePath = storage_path('app/public/image/') . $imageFile;
             $image = Image::make($filename)
                 ->resize(1000, null, function ($constraint) {
                     $constraint->aspectRatio();
                     $constraint->upsize();
                 })
                 ->orientate()
-                ->save($tmpPath);
+                ->save($imagePath);
 
-            $path = Storage::disk('s3')->putFile('myprefix',$tmpPath, 'public');
+            $path = Storage::disk('s3')->putFile('myprefix',$imagePath, 'public');
             $tweet->image = Storage::disk('s3')->url($path);
 
-            Storage::disk('local')->delete('tmp/' . $tmpFile);
+            Storage::disk('local')->delete('app/public/image/' . $imageFile);
         }
 
         preg_match_all('/#([a-zA-Z0-9０-９ぁ-んァ-ヶー一-龠]+)/u', $request->tag_box, $match);
