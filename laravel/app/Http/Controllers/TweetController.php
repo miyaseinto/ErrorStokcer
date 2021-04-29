@@ -79,6 +79,8 @@ class TweetController extends Controller
         $tweet->content = $request->content;
         $tweet->tag_box = $request->tag_box;
         $tweet->title = $request->title;
+
+        \Slack::send('Hello World!');
       
         if($request->hasFile('image')){
             $filename = $request->file('image');
